@@ -1,0 +1,84 @@
+<html>
+<head><link rel="shortcut icon" href="#" /></head>
+<body>
+{% load widget_tweaks %}
+
+{% block content %}
+  <form method="get">
+    <div class="form-group">
+      <h4 style="margin-top: 0">Filter</h4>
+      <div class="row">
+        <div class="form-group col-sm-4 col-md-3">
+          {{ filter.form.name.label_tag }}
+          {% render_field filter.form.name class="form-control" %}
+        </div><br>
+        <div class="form-group col-sm-4 col-md-3">
+          {{ filter.form.work_exp.label_tag }}
+          {% render_field filter.form.work_exp class="form-control" %}
+        </div><br>
+        <div class="form-group col-sm-4 col-md-3">
+          {{ filter.form.skills.label_tag }}
+          {% render_field filter.form.skills class="form-control" %}
+        </div><br>
+        <div class="form-group col-sm-4 col-md-3">
+          {{ filter.form.preferred_loc.label_tag }}
+          {% render_field filter.form.preferred_loc class="form-control" %}
+        </div>
+
+       </div>
+      <button type="submit" class="btn btn-primary"  id="search">
+        <span class=""></span> Search
+      </button>
+      <button type="submit" class="btn btn-primary" id="download">
+        <span class=""></span> Download
+      </button>
+    </div>
+  </form>
+ 
+
+   <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Mobile</th>
+        <th>Email</th>        
+        <th>Work Experience</th>
+        <th>Skills</th>
+        <th>Preferred Location</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for user in filter.qs %}
+        <tr>
+          <td>{{ user.name }}</td>
+          <td>{{ user.mobile }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.work_exp }}</td>
+          <td>{{ user.skills }}</td>
+          <td>{{ user.preferred_loc }}</td>          
+        </tr>
+      {% empty %}
+        <tr>
+          <td colspan="5">No data</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
+</body>
+</html>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript"> 
+
+$('#download').on('click', function(e){
+	e.preventDefault();
+    $('#btnval').val('2');
+    _url = location.href;
+    _url += (_url.split('?')[1] ? '&':'?') + "btnval=2";
+    window.location.href = _url;  
+});
+	
+
+
+</script>

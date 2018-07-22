@@ -1,0 +1,18 @@
+
+{% block content %}
+    <h1>User List</h1>
+
+    {% if userprofile_list %}
+    <ul>
+
+      {% for user in userprofile_list %}
+      <li>
+        {{ user.name }} 
+      </li>
+      {% endfor %}
+
+    </ul>
+    {% else %}
+      <p>There are no users.</p>
+    {% endif %}       
+{% endblock %}
